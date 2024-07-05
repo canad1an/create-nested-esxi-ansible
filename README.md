@@ -3,8 +3,8 @@
 This playbook will deploy one or many nested ESXi hosts on to your physical ESXi vSphere host. The purpose is to create a nested esxi environment for various purposes. In my case, for deploying a VCF environment. To see more details, please see my blog post: https://mattadam.com/2024/01/09/deploy-nested-esxi-vms-using-a-kickstart-ks-script-and-ansible-automation/
 
 ## Variables
-/vars/creds.yaml - There's a few variables to set in the creds file for this script to work
-
+/vars/creds.yaml - There's a few variables to set in the creds file for this script to work.  
+Note that the networks need to be portgroups that are created on your physical ESXi host's switch.
 ```
 nested_info: # This is a list of the ESXI VMs that you want to create, add more or remove some as necessary
   - name: vcf-mgmt-esxi-1 # VM name
@@ -48,11 +48,8 @@ nested_info_global: # Global settings for the nested ESXi VMs
 /roles/deployesxi/tasks/main.yaml - There's a few variables to set in the creds file for this script to work
 
 ```
-datacenter: ha-datacenter - Modify this to your datacenter name
+datacenter: ha-datacenter - Modify this to your datacenter name. If no vCenter is deployed managing the physical host, leave ha-datacenter
 path: "ISOs/{{ nested_info.name }}.iso" - This requires a folder called "ISOs" to exist in your root directory of the datacenter. Modify it as needed.
-```
-
-```
 ```
 
 ## Usage

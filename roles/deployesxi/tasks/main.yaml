@@ -78,21 +78,21 @@
     disk:
       - size_gb: 40
         type: thin
-        datastore: Datastore1
+        datastore: "{{ physical_esxi_info.datastore_name }}"
         unit_number: 0
         disk_mode: 'persistent'
         controller_type: 'paravirtual'
         controller_number: 0
       - size_gb: 1024
         type: thin
-        datastore: Datastore1
+        datastore: "{{ physical_esxi_info.datastore_name }}"
         unit_number: 1
         disk_mode: 'persistent'
         controller_type: 'paravirtual'
         controller_number: 0
       - size_gb: 40
         type: thin
-        datastore: Datastore1
+        datastore: "{{ physical_esxi_info.datastore_name }}"
         unit_number: 2
         disk_mode: 'persistent'
         controller_type: 'paravirtual'
@@ -106,7 +106,7 @@
       - controller_number: 0
         unit_number: 0
         type: iso
-        iso_path: "[Datastore1] ISOs/{{ nested_info.name }}.iso"
+        iso_path: "[{{ physical_esxi_info.datastore_name }}] ISOs/{{ nested_info.name }}.iso"
         state: present
 
 - name: Cleanup local files
